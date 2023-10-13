@@ -6,7 +6,7 @@ function ObtainDiscordIdentifier(src)
 end
 
 function Notify(src, text, notifType)
-    QBCore.Functions.Notify(src, text, notifType)
+    TriggerClientEvent('QBCore:Notify', src, text, notifType)
 end
 
 function ProduceReward(src)
