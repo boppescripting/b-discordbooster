@@ -1,3 +1,6 @@
+local DiscordGuildID = '',
+local DiscordBotToken = '',
+
 -- Functions
 function CollectedThisMonth(discord)
     local row = MySQL.query.await('SELECT * FROM b_discordbooster WHERE discord=?', { discord })
@@ -16,8 +19,7 @@ end
 RegisterCommand('checkboost', function(source)
     local src = source
     local discord = ObtainDiscordIdentifier(src)
-    local url = string.format('https://discord.com/api/v9/guilds/%s/members/%s', Config.DiscordGuildID, tostring(discord))
-    print(discord)
+    local url = string.format('https://discord.com/api/v9/guilds/%s/members/%s', DiscordGuildID, tostring(discord))
 
     PerformHttpRequest(url, function (errorCode, rdata, resultHeaders)
         local res = json.decode(rdata)
@@ -35,7 +37,7 @@ RegisterCommand('checkboost', function(source)
                 end
             end
         else
-            print(errorCode)
+            print('^3[ ERROR ] ^7| ^1Code 200 was not reached. ^7| Recieved: ( ^8'..errorCode..' ^7)')
         end
-    end, "GET", "", {["Content-type"] = "application/json", ["Authorization"] = string.format('Bot %s', Config.DiscordBotToken)})
+    end, "GET", "", {["Content-type"] = "application/json", ["Authorization"] = string.format('Bot %s', DiscordBotToken)})
 end, false)
