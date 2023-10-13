@@ -24,8 +24,6 @@
 ]]
 
 Config = {
-    DiscordGuildID = '',
-    DiscordBotToken = '',
     Reward = {
         type = 'cash',
         amount = 1500,
